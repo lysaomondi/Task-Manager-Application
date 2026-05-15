@@ -1,18 +1,56 @@
-# React + Vite
+# Task Manager App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ ## Project Overview
 
-Currently, two official plugins are available:
+Task Manager App is a fully responsive React application that allows users to manage daily tasks efficiently. Users can add, complete, delete, and favorite tasks through a clean and modern interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+### Authentication
+User login using Email & Password
+Protected actions for authenticated users
+Firebase Authentication integration
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+### Task Management
+Add new tasks
+Delete tasks
+Mark tasks as completed
+Favorite important tasks
+View recent tasks on dashboard
 
-Note: This will impact Vite dev & build performances.
+### Routing
 
-## Expanding the ESLint configuration
+The application uses React Router for navigation between pages:
+Dashboard
+Tasks
+Favorites
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Testing
+
+The project includes unit and component tests using:
+Vitest
+React Testing Library
+
+## Technologies Used
+
+Frontend
+React
+Vite
+React Router DOM
+CSS / Tailwind CSS
+
+Backend & Database
+Firebase Authentication
+Firebase Firestore
+
+Testing
+Vitest
+React Testing Library
+
+Deployment
+GitHub Actions
+GitHub Pages / Vercel
+
+## Author
+
+Created by Lysa Omondi
