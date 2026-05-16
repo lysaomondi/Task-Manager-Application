@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import TaskCard from "../components/TaskCard";
-
+import Login from "../pages/Login";
 import { useTasks } from "../context/TaskContext";
 import { useAuth } from "../context/AuthContext";
 
@@ -21,12 +21,12 @@ export default function Dashboard() {
 
   const [task, setTask] = useState("");
 
-  // ✅ FIX: safe recent tasks sorting
+  // FIX: safe recent tasks sorting
   const recentTasks = [...tasks]
     .sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0))
     .slice(0, 3);
 
-  // ✅ FIX: pass user.uid to Firestore
+  // FIX: pass user.uid to Firestore
   const handleAddTask = async () => {
     if (!user) {
       navigate("/login");
@@ -35,7 +35,7 @@ export default function Dashboard() {
 
     if (!task.trim()) return;
 
-    await addTask(task, user.uid); // 🔥 IMPORTANT FIX
+    await addTask(task, user.uid); 
 
     setTask("");
   };
@@ -53,6 +53,7 @@ export default function Dashboard() {
           <li><Link to="/dashboard">Dashboard</Link></li>
           <li><Link to="/tasks">My Tasks</Link></li>
           <li><Link to="/favorites">Favorites</Link></li>
+          <li><Link to="/login">Login</Link></li>
         </ul>
       </div>
 

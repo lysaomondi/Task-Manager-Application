@@ -25,7 +25,7 @@ export function TaskProvider({ children }) {
 
   const tasksRef = collection(db, "tasks");
 
-  // ✅ REAL-TIME SYNC (MAIN FIX)
+
   useEffect(() => {
     if (!user) {
       setTasks([]);
@@ -47,13 +47,13 @@ export function TaskProvider({ children }) {
     return () => unsubscribe();
   }, [user]);
 
-  // ✅ ADD TASK (NO MANUAL REFRESH NEEDED)
+  
   const addTask = async (title) => {
     if (!title.trim() || !user) return;
 
     await addDoc(tasksRef, {
       title,
-      userId: user.uid, // 🔥 IMPORTANT FIX
+      userId: user.uid, 
       completed: false,
       favorite: false,
       createdAt: new Date(),
@@ -69,7 +69,7 @@ export function TaskProvider({ children }) {
     });
   };
 
-  // TOGGLE FAVORITE
+
   const toggleFavorite = async (id, favorite) => {
     const taskDoc = doc(db, "tasks", id);
 
@@ -78,7 +78,7 @@ export function TaskProvider({ children }) {
     });
   };
 
-  // DELETE
+
   const deleteTask = async (id) => {
     const taskDoc = doc(db, "tasks", id);
 

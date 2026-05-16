@@ -34,7 +34,7 @@ test("renders tasks page", () => {
     </BrowserRouter>
   );
 
-  // ✅ FIX: target heading specifically
+  // FIX: target heading specifically
   expect(
     screen.getByRole("heading", { name: /my tasks/i })
   ).toBeInTheDocument();

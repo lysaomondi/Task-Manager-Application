@@ -51,7 +51,7 @@ export default function Login() {
         <h1 className="text-4xl font-bold text-slate-800 mb-6 text-center">
           {isSignup
             ? "Create Account"
-            : "Welcome Back 👋"}
+            : "Login to TaskFlow"}
         </h1>
 
         <form

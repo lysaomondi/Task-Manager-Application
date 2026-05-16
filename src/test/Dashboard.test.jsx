@@ -4,7 +4,7 @@ import { TaskProvider } from "../context/TaskContext";
 import { BrowserRouter } from "react-router-dom";
 import { vi, test, expect } from "vitest";
 
-// ✅ MOCK AUTH CONTEXT (CRITICAL FIX)
+
 vi.mock("../context/AuthContext", () => ({
   useAuth: () => ({
     user: { uid: "test-user" },

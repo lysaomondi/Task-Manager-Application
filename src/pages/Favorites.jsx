@@ -45,6 +45,7 @@ export default function Favorites() {
               Favorites
             </Link>
           </li>
+           <li><Link to="/login">Login</Link></li>
         </ul>
       </div>
 

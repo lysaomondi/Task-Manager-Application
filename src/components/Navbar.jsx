@@ -14,11 +14,6 @@ export default function Navbar() {
         
         {user && (
           <>
-            <img
-              src={user.photoURL}
-              alt="profile"
-              className="w-10 h-10 rounded-full border-2 border-pink-400"
-            />
 
             <button
               onClick={logout}

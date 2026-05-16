@@ -9,10 +9,9 @@ import { useTasks } from "../context/TaskContext";
 export default function MyTasks() {
   const { tasks, toggleTask, toggleFavorite, deleteTask } = useTasks();
 
-  // ✅ SEARCH STATE
+
   const [search, setSearch] = useState("");
 
-  // ✅ FILTER TASKS
   const filteredTasks = tasks.filter((task) =>
     task.title.toLowerCase().includes(search.toLowerCase())
   );
@@ -36,6 +35,7 @@ export default function MyTasks() {
           <li>
             <Link to="/favorites">Favorites</Link>
           </li>
+         <li><Link to="/login">Login</Link></li>
         </ul>
       </div>
 
@@ -47,7 +47,6 @@ export default function MyTasks() {
           My Tasks
         </h1>
 
-        {/* ✅ SEARCH BAR */}
         <div className="flex justify-center mb-8">
           <input
             type="text"
