@@ -46,7 +46,7 @@ export default function Dashboard() {
       {/* Sidebar */}
       <div className="hidden md:flex flex-col w-64 bg-slate-900 text-white p-6">
         <h2 className="text-3xl font-bold mb-10 text-pink-400">
-          TaskFlow
+          Task-Manager
         </h2>
 
         <ul className="space-y-6 text-lg">

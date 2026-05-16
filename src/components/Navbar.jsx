@@ -7,7 +7,7 @@ export default function Navbar() {
     <div className="flex justify-between items-center bg-white p-5 rounded-3xl shadow-sm">
       
       <h1 className="text-3xl font-bold text-slate-800">
-        TaskFlow
+        Task-Manager
       </h1>
 
       <div className="flex items-center gap-4">
