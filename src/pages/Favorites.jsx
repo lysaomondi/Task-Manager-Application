@@ -20,10 +20,10 @@ export default function Favorites() {
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-slate-100 to-pink-100">
       
-      <div className="hidden md:flex flex-col w-64 bg-slate-900 text-white p-6">
+      <div className="hidden md:flex flex-col w-64 bg-[#120329] text-white p-6">
         
-        <h2 className="text-3xl font-bold mb-10 text-pink-400">
-          TaskFlow
+        <h2 className="text-3xl font-bold mb-10 text-pink-500">
+          Task-Manager
         </h2>
 
         <ul className="space-y-6 text-lg">
@@ -57,7 +57,7 @@ export default function Favorites() {
           Favorite Tasks
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           
           {favoriteTasks.map((task) => (
             <TaskCard

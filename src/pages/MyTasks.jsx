@@ -20,9 +20,9 @@ export default function MyTasks() {
     <div className="flex min-h-screen bg-gradient-to-br from-slate-100 to-pink-100">
       
       {/* SIDEBAR */}
-      <div className="hidden md:flex flex-col w-64 bg-slate-900 text-white p-6">
-        <h2 className="text-3xl font-bold mb-10 text-pink-400">
-          TaskFlow
+      <div className="hidden md:flex flex-col w-64 bg-[#120329] text-white p-6">
+        <h2 className="text-3xl font-bold mb-10 text-pink-500">
+          Task-Manager
         </h2>
 
         <ul className="space-y-6 text-lg">
@@ -53,12 +53,12 @@ export default function MyTasks() {
             placeholder="Search tasks..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full max-w-md p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
+            className="w-1/2 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
           />
         </div>
 
         {/* TASK GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {filteredTasks.length > 0 ? (
             filteredTasks.map((task) => (
               <TaskCard
