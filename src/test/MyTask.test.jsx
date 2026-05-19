@@ -1,41 +1,42 @@
 import { render, screen } from "@testing-library/react";
+
 import MyTasks from "../pages/MyTasks";
+
 import { BrowserRouter } from "react-router-dom";
+
 import { vi, test, expect } from "vitest";
 
-// Mock Auth
+// MOCK AUTH
 vi.mock("../context/AuthContext", () => ({
   useAuth: () => ({
-    user: { uid: "test-user" },
+    user: { uid: "123" },
   }),
 }));
 
-// Mock Tasks
+// MOCK TASK CONTEXT
 vi.mock("../context/TaskContext", () => ({
   useTasks: () => ({
-    tasks: [
-      {
-        id: "1",
-        title: "Sample Task",
-        completed: false,
-        favorite: false,
-      },
-    ],
-    toggleTask: vi.fn(),
+    subscribeToTasks: (uid, cb) => {
+      cb([]);
+      return vi.fn();
+    },
+    updateStatus: vi.fn(),
     toggleFavorite: vi.fn(),
     deleteTask: vi.fn(),
   }),
 }));
 
-test("renders tasks page", () => {
+test("renders my tasks page", () => {
+
   render(
     <BrowserRouter>
       <MyTasks />
     </BrowserRouter>
   );
 
-  // FIX: target heading specifically
   expect(
-    screen.getByRole("heading", { name: /my tasks/i })
+    screen.getByRole("heading", {
+      name: /my tasks/i,
+    })
   ).toBeInTheDocument();
 });

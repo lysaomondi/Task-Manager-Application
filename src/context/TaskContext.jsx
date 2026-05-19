@@ -1,98 +1,80 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-
+import { createContext, useContext, useState } from "react";
 import {
   collection,
   addDoc,
   deleteDoc,
-  updateDoc,
   doc,
+  updateDoc,
+  query,
+  where,
   onSnapshot,
+  serverTimestamp,
 } from "firebase/firestore";
 
 import { db } from "../services/firebase";
-import { useAuth } from "./AuthContext";
 
 const TaskContext = createContext();
 
-export function TaskProvider({ children }) {
+export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
-  const { user } = useAuth();
 
-  const tasksRef = collection(db, "tasks");
+  const subscribeToTasks = (userId, callback) => {
+    const q = query(
+      collection(db, "tasks"),
+      where("userId", "==", userId)
+    );
 
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const data = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
 
-  useEffect(() => {
-    if (!user) {
-      setTasks([]);
-      return;
-    }
+      setTasks(data);
 
-    const unsubscribe = onSnapshot(tasksRef, (snapshot) => {
-      const fetchedTasks = snapshot.docs
-        .map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }))
-        // only this user's tasks
-        .filter((task) => task.userId === user.uid);
-
-      setTasks(fetchedTasks);
+      if (callback) {
+        callback(data);
+      }
     });
-
-    return () => unsubscribe();
-  }, [user]);
-
   
-  const addTask = async (title) => {
-    if (!title.trim() || !user) return;
+    return unsubscribe;
+  };
 
-    await addDoc(tasksRef, {
-      title,
-      userId: user.uid, 
-      completed: false,
+  const addTask = async (task) => {
+    if (!task.title.trim()) return;
+
+    await addDoc(collection(db, "tasks"), {
+      title: task.title.trim(),
+      status: "pending",
       favorite: false,
-      createdAt: new Date(),
+      userId: task.userId,
+      createdAt: serverTimestamp(),
     });
   };
-
-  // TOGGLE COMPLETE
-  const toggleTask = async (id, completed) => {
-    const taskDoc = doc(db, "tasks", id);
-
-    await updateDoc(taskDoc, {
-      completed: !completed,
-    });
-  };
-
-
-  const toggleFavorite = async (id, favorite) => {
-    const taskDoc = doc(db, "tasks", id);
-
-    await updateDoc(taskDoc, {
-      favorite: !favorite,
-    });
-  };
-
 
   const deleteTask = async (id) => {
-    const taskDoc = doc(db, "tasks", id);
+    await deleteDoc(doc(db, "tasks", id));
+  };
+  
+  const updateStatus = async (id, status) => {
+    await updateDoc(doc(db, "tasks", id), { status });
+  };  
 
-    await deleteDoc(taskDoc);
+  const toggleFavorite = async (task) => {
+    await updateDoc(doc(db, "tasks", task.id), {
+      favorite: !task.favorite,
+    });
   };
 
   return (
     <TaskContext.Provider
       value={{
         tasks,
+        subscribeToTasks,
         addTask,
-        toggleTask,
-        toggleFavorite,
         deleteTask,
+        updateStatus,
+        toggleFavorite,
       }}
     >
       {children}
