@@ -19,7 +19,6 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  // Register
   const signup = async (email, password) => {
     return createUserWithEmailAndPassword(
       auth,
@@ -28,7 +27,6 @@ export function AuthProvider({ children }) {
     );
   };
 
-  // Login
   const login = async (email, password) => {
     return signInWithEmailAndPassword(
       auth,
@@ -37,7 +35,6 @@ export function AuthProvider({ children }) {
     );
   };
 
-  // Logout
   const logout = async () => {
     return signOut(auth);
   };

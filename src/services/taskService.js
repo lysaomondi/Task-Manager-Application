@@ -13,10 +13,6 @@ import {
 
 import { db } from "./firebase";
 
-
-// =======================
-// ADD TASK
-// =======================
 export const addTask = async (title, userId) => {
   try {
     return await addDoc(collection(db, "tasks"), {
@@ -31,10 +27,6 @@ export const addTask = async (title, userId) => {
   }
 };
 
-
-// =======================
-// REAL-TIME TASKS (FIX)
-// =======================
 export const subscribeToTasks = (userId, callback) => {
   const q = query(
     collection(db, "tasks"),
@@ -51,10 +43,6 @@ export const subscribeToTasks = (userId, callback) => {
   });
 };
 
-
-// =======================
-// GET TASKS (ONE-TIME FETCH - OPTIONAL)
-// =======================
 export const getTasks = async (userId) => {
   try {
     const q = query(
@@ -74,10 +62,6 @@ export const getTasks = async (userId) => {
   }
 };
 
-
-// =======================
-// TOGGLE DONE
-// =======================
 export const toggleTask = async (task) => {
   const ref = doc(db, "tasks", task.id);
 
@@ -86,10 +70,6 @@ export const toggleTask = async (task) => {
   });
 };
 
-
-// =======================
-// TOGGLE FAVORITE
-// =======================
 export const toggleFavorite = async (task) => {
   const ref = doc(db, "tasks", task.id);
 
@@ -98,10 +78,6 @@ export const toggleFavorite = async (task) => {
   });
 };
 
-
-// =======================
-// DELETE TASK
-// =======================
 export const deleteTask = async (id) => {
   const ref = doc(db, "tasks", id);
   return await deleteDoc(ref);
